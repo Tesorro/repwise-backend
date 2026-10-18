@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
-		"module": "nodenext",
-		"moduleResolution": "nodenext",
+		"module": "preserve",
+		"moduleResolution": "bundler",
 		"resolvePackageJsonExports": true,
 		"esModuleInterop": true,
 		"isolatedModules": true,
@@ -28,6 +28,10 @@
 		"forceConsistentCasingInFileNames": false,
 		"noFallthroughCasesInSwitch": false,
 		"jsx": "react",
-		"types": ["vitest/globals", "node"]
+  "types": [
+   "vitest/globals",
+   "node"
+  ],
+  "resolveJsonModule": true
 	}
 }

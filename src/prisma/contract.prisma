@@ -1,0 +1,75 @@
+// use prisma-8
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
+  id        String   @id @default(uuid())
+
+  email     String   @unique
+  password  String
+  
+  username  String   @unique
+  avatar    String?
+  name      String
+  
+  role      Role     @default(USER)
+
+  authMethod AuthMethod @default(EMAIL)
+
+  isVerified Boolean @default(false) @map("is_verified")
+  isTwoFactorEnabled Boolean @default(false) @map("is_two_factor_enabled")
+  
+  accounts Account[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt temporal.updatedAt() @map("updated_at")
+
+  @@map("users")
+}
+
+model Account {
+  id        String   @id @default(uuid())
+
+  type      String
+  provider  String
+
+  refreshToken String? @map("refresh_token")
+  accessToken String? @map("access_token")
+  expiresAt Int? @map("expires_at")
+
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt temporal.updatedAt() @map("updated_at")
+
+  @@map("accounts")
+}
+
+model Token {
+  id        String   @id @default(uuid())
+
+  email String @map("email") @unique
+  value String @map("value") @unique
+  type TokenType @map("type")
+  expiresAt DateTime @map("expires_at")
+
+  @@map("tokens")
+}
+
+enum AuthMethod {
+  GOOGLE
+  EMAIL
+  YANDEX
+}
+
+enum TokenType {
+  ACCESS
+  REFRESH
+  VERIFICATION
+  TWO_FACTOR
+  RESET_PASSWORD
+}
