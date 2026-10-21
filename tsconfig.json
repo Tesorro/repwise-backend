@@ -22,7 +22,7 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"strictPropertyInitialization": false,
-		"strictNullChecks": false,
+		"strictNullChecks": true,
 		"noImplicitAny": false,
 		"strictBindCallApply": false,
 		"forceConsistentCasingInFileNames": false,
