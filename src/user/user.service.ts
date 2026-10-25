@@ -34,7 +34,9 @@ export class UserService {
 	public async findByUsername(username: string) {
 		const user = await this.prismaService.db.orm.public.User.include(
 			'accounts'
-		).where({ username }).first()
+		)
+			.where({ username })
+			.first()
 
 		return user
 	}
