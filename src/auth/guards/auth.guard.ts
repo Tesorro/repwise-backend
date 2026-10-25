@@ -7,7 +7,7 @@ import {
 import type { Request } from 'express'
 
 import { type UserRole } from '@/auth/decorators/roles.decorator.js'
-import { UserService } from '@/user/user.service'
+import { UserService } from '@/user/user.service.js'
 
 @Injectable()
 export class AuthGuard implements CanActivate {
